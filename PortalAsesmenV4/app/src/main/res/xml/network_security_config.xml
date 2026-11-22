@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Required because one of the portal cards currently redirects to an HTTP server. -->
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>
