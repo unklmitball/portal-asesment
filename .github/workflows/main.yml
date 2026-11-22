@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: PortalAsesmen
+        working-directory: PortalAsesmenV4
     steps:
       - name: Checkout kode
         uses: actions/checkout@v4
@@ -32,5 +32,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: PortalAsesmen-APK
-          path: PortalAsesmen/app/build/outputs/apk/debug/*.apk
+          name: PortalAsesmenV4-APK
+          path: PortalAsesmenV4/app/build/outputs/apk/debug/*.apk
