@@ -94,8 +94,10 @@ public class MainActivity extends Activity {
         int sideWidthPx = Math.max(dp(48), (screenWidthPx - pillWidthPx) / 2);
 
         TextClock clock = new TextClock(this);
+        // Use a 24-hour clock in both device settings to avoid the AM/PM
+        // suffix being clipped between the clock and the centered toolbar pill.
         clock.setFormat24Hour("HH:mm:ss");
-        clock.setFormat12Hour("hh:mm:ss a");
+        clock.setFormat12Hour("HH:mm:ss");
         clock.setTextColor(Color.BLACK);
         clock.setTextSize(12);
         clock.setTypeface(Typeface.DEFAULT, Typeface.BOLD);

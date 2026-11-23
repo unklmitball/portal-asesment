@@ -54,3 +54,11 @@ The toolbar capsule was resized using the supplied 686 × 1536 reference image:
 - The capsule remains horizontally centered independently of the clock and battery indicators.
 - The existing black status bar, blue-violet navigation bar, small glyphs, and functional refresh button are preserved.
 - App version: 1.6 (versionCode 7).
+
+
+## V8 — clock suffix clipping fix
+
+- The custom clock now uses `HH:mm:ss` in both 12-hour and 24-hour device settings.
+- This removes the AM/PM suffix that was being clipped by the fixed clock area beside the centered pill.
+- The pill width, height, center position, icon sizes, status bar, navigation bar, WebView, and refresh behavior are unchanged.
+- App version: 1.7 (versionCode 8).

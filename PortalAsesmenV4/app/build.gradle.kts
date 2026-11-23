@@ -11,7 +11,7 @@ android {
         minSdk = 23
         // Target 34 keeps the normal status-bar inset behavior on Android 15.
         targetSdk = 34
-        versionCode = 7
-        versionName = "1.6"
+        versionCode = 8
+        versionName = "1.7"
     }
 }
