@@ -76,11 +76,11 @@ public class MainActivity extends Activity {
     private void configureSystemBars() {
         Window window = getWindow();
         window.setStatusBarColor(Color.WHITE);
-        window.setNavigationBarColor(Color.WHITE);
+        // Match the blue-violet navigation bar from the user's reference image.
+        window.setNavigationBarColor(Color.rgb(132, 139, 255));
+        // Dark status-bar icons on white; navigation-bar light mode is deliberately
+        // NOT enabled so the Back/Home/Recents icons remain white on the blue bar.
         int flags = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            flags |= View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
-        }
         window.getDecorView().setSystemUiVisibility(flags);
     }
 
@@ -142,11 +142,26 @@ public class MainActivity extends Activity {
         pill.setElevation(dp(5));
         pill.setClipToOutline(true);
 
-        pill.addView(new ToolbarGlyphView(this, ToolbarGlyphView.REFRESH),
+        ToolbarGlyphView refreshGlyph = new ToolbarGlyphView(this, ToolbarGlyphView.REFRESH);
+        refreshGlyph.setContentDescription("Refresh halaman");
+        refreshGlyph.setClickable(true);
+        refreshGlyph.setFocusable(true);
+        refreshGlyph.setOnClickListener(v -> {
+            if (webView != null) {
+                webView.reload();
+            }
+        });
+        pill.addView(refreshGlyph,
                 new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
-        pill.addView(new ToolbarGlyphView(this, ToolbarGlyphView.EXPAND),
+
+        ToolbarGlyphView expandGlyph = new ToolbarGlyphView(this, ToolbarGlyphView.EXPAND);
+        expandGlyph.setContentDescription("Dekoratif");
+        pill.addView(expandGlyph,
                 new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
-        pill.addView(new ToolbarGlyphView(this, ToolbarGlyphView.CLOSE),
+
+        ToolbarGlyphView closeGlyph = new ToolbarGlyphView(this, ToolbarGlyphView.CLOSE);
+        closeGlyph.setContentDescription("Dekoratif");
+        pill.addView(closeGlyph,
                 new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
 
         FrameLayout.LayoutParams pillParams = new FrameLayout.LayoutParams(
@@ -339,39 +354,39 @@ public class MainActivity extends Activity {
             float cy = getHeight() / 2f;
             paint.setColor(Color.WHITE);
             paint.setStyle(Paint.Style.STROKE);
-            paint.setStrokeWidth(2.0f * d);
+            paint.setStrokeWidth(1.55f * d);
             paint.setStrokeCap(Paint.Cap.ROUND);
             paint.setStrokeJoin(Paint.Join.ROUND);
 
             if (glyph == REFRESH) {
-                RectF arc = new RectF(cx - 7.2f * d, cy - 7.2f * d,
-                        cx + 7.2f * d, cy + 7.2f * d);
+                RectF arc = new RectF(cx - 5.8f * d, cy - 5.8f * d,
+                        cx + 5.8f * d, cy + 5.8f * d);
                 canvas.drawArc(arc, 48, 285, false, paint);
                 Path arrow = new Path();
-                arrow.moveTo(cx + 4.2f * d, cy - 6.0f * d);
-                arrow.lineTo(cx + 9.0f * d, cy - 7.3f * d);
-                arrow.lineTo(cx + 8.1f * d, cy - 2.3f * d);
+                arrow.moveTo(cx + 3.4f * d, cy - 4.8f * d);
+                arrow.lineTo(cx + 7.2f * d, cy - 5.8f * d);
+                arrow.lineTo(cx + 6.5f * d, cy - 1.8f * d);
                 canvas.drawPath(arrow, paint);
             } else if (glyph == EXPAND) {
                 Path arrows = new Path();
                 // North-east arrow
-                arrows.moveTo(cx - 1.0f * d, cy + 1.0f * d);
-                arrows.lineTo(cx + 7.0f * d, cy - 7.0f * d);
-                arrows.moveTo(cx + 2.0f * d, cy - 7.0f * d);
-                arrows.lineTo(cx + 7.0f * d, cy - 7.0f * d);
-                arrows.lineTo(cx + 7.0f * d, cy - 2.0f * d);
+                arrows.moveTo(cx - 0.8f * d, cy + 0.8f * d);
+                arrows.lineTo(cx + 5.6f * d, cy - 5.6f * d);
+                arrows.moveTo(cx + 1.6f * d, cy - 5.6f * d);
+                arrows.lineTo(cx + 5.6f * d, cy - 5.6f * d);
+                arrows.lineTo(cx + 5.6f * d, cy - 1.6f * d);
                 // South-west arrow
-                arrows.moveTo(cx + 1.0f * d, cy - 1.0f * d);
-                arrows.lineTo(cx - 7.0f * d, cy + 7.0f * d);
-                arrows.moveTo(cx - 2.0f * d, cy + 7.0f * d);
-                arrows.lineTo(cx - 7.0f * d, cy + 7.0f * d);
-                arrows.lineTo(cx - 7.0f * d, cy + 2.0f * d);
+                arrows.moveTo(cx + 0.8f * d, cy - 0.8f * d);
+                arrows.lineTo(cx - 5.6f * d, cy + 5.6f * d);
+                arrows.moveTo(cx - 1.6f * d, cy + 5.6f * d);
+                arrows.lineTo(cx - 5.6f * d, cy + 5.6f * d);
+                arrows.lineTo(cx - 5.6f * d, cy + 1.6f * d);
                 canvas.drawPath(arrows, paint);
             } else {
-                canvas.drawLine(cx - 5.2f * d, cy - 5.2f * d,
-                        cx + 5.2f * d, cy + 5.2f * d, paint);
-                canvas.drawLine(cx - 5.2f * d, cy + 5.2f * d,
-                        cx + 5.2f * d, cy - 5.2f * d, paint);
+                canvas.drawLine(cx - 4.2f * d, cy - 4.2f * d,
+                        cx + 4.2f * d, cy + 4.2f * d, paint);
+                canvas.drawLine(cx - 4.2f * d, cy + 4.2f * d,
+                        cx + 4.2f * d, cy - 4.2f * d, paint);
             }
         }
     }

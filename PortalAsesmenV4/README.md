@@ -20,3 +20,13 @@ Android WebView wrapper for `https://asesemen-ekamas.carrd.co`.
 ## Security note
 
 This build permits unencrypted HTTP traffic because the current portal redirects to an HTTP server. HTTP does not encrypt login details or page contents. Avoid entering passwords or other sensitive information on an HTTP page; the portal operator should ideally provide HTTPS.
+
+
+## V5 changes
+
+- Navigation bar color set to `#848BFF`, with white Android navigation icons.
+- The left refresh glyph now reloads the currently displayed WebView page.
+- The center and right glyphs remain decorative.
+- Toolbar pill dimensions and centered placement are unchanged.
+- Only the three white glyph drawings were reduced in size; the black pill background was not resized.
+- App version: 1.4 (versionCode 5).
