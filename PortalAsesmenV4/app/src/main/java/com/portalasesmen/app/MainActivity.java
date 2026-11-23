@@ -75,13 +75,13 @@ public class MainActivity extends Activity {
 
     private void configureSystemBars() {
         Window window = getWindow();
-        window.setStatusBarColor(Color.WHITE);
+        window.setStatusBarColor(Color.BLACK);
         // Match the blue-violet navigation bar from the user's reference image.
         window.setNavigationBarColor(Color.rgb(132, 139, 255));
         // Dark status-bar icons on white; navigation-bar light mode is deliberately
         // NOT enabled so the Back/Home/Recents icons remain white on the blue bar.
-        int flags = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-        window.getDecorView().setSystemUiVisibility(flags);
+        // No LIGHT_STATUS_BAR flag: Android draws status-bar icons in white.
+        window.getDecorView().setSystemUiVisibility(0);
     }
 
     private FrameLayout createToolbar() {
@@ -89,7 +89,8 @@ public class MainActivity extends Activity {
         row.setBackgroundColor(Color.WHITE);
 
         int screenWidthPx = getResources().getDisplayMetrics().widthPixels;
-        int pillWidthPx = Math.round(screenWidthPx * 0.64f);
+        int pillWidthPx = Math.round(screenWidthPx * 0.593f);
+        int pillHeightPx = Math.round(pillWidthPx / 5.22f);
         int sideWidthPx = Math.max(dp(48), (screenWidthPx - pillWidthPx) / 2);
 
         TextClock clock = new TextClock(this);
@@ -138,7 +139,7 @@ public class MainActivity extends Activity {
         pill.setOrientation(LinearLayout.HORIZONTAL);
         pill.setGravity(Gravity.CENTER);
         pill.setPadding(dp(12), 0, dp(12), 0);
-        pill.setBackground(roundRect(Color.BLACK, dp(40)));
+        pill.setBackground(roundRect(Color.BLACK, pillHeightPx / 2));
         pill.setElevation(dp(5));
         pill.setClipToOutline(true);
 
@@ -165,7 +166,7 @@ public class MainActivity extends Activity {
                 new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
 
         FrameLayout.LayoutParams pillParams = new FrameLayout.LayoutParams(
-                pillWidthPx, dp(45), Gravity.CENTER);
+                pillWidthPx, pillHeightPx, Gravity.CENTER);
         row.addView(pill, pillParams);
         return row;
     }
@@ -354,39 +355,39 @@ public class MainActivity extends Activity {
             float cy = getHeight() / 2f;
             paint.setColor(Color.WHITE);
             paint.setStyle(Paint.Style.STROKE);
-            paint.setStrokeWidth(1.55f * d);
+            paint.setStrokeWidth(1.2f * d);
             paint.setStrokeCap(Paint.Cap.ROUND);
             paint.setStrokeJoin(Paint.Join.ROUND);
 
             if (glyph == REFRESH) {
-                RectF arc = new RectF(cx - 5.8f * d, cy - 5.8f * d,
-                        cx + 5.8f * d, cy + 5.8f * d);
+                RectF arc = new RectF(cx - 4.4f * d, cy - 4.4f * d,
+                        cx + 4.4f * d, cy + 4.4f * d);
                 canvas.drawArc(arc, 48, 285, false, paint);
                 Path arrow = new Path();
-                arrow.moveTo(cx + 3.4f * d, cy - 4.8f * d);
-                arrow.lineTo(cx + 7.2f * d, cy - 5.8f * d);
-                arrow.lineTo(cx + 6.5f * d, cy - 1.8f * d);
+                arrow.moveTo(cx + 2.6f * d, cy - 3.6f * d);
+                arrow.lineTo(cx + 5.4f * d, cy - 4.4f * d);
+                arrow.lineTo(cx + 4.9f * d, cy - 1.4f * d);
                 canvas.drawPath(arrow, paint);
             } else if (glyph == EXPAND) {
                 Path arrows = new Path();
                 // North-east arrow
                 arrows.moveTo(cx - 0.8f * d, cy + 0.8f * d);
-                arrows.lineTo(cx + 5.6f * d, cy - 5.6f * d);
-                arrows.moveTo(cx + 1.6f * d, cy - 5.6f * d);
-                arrows.lineTo(cx + 5.6f * d, cy - 5.6f * d);
-                arrows.lineTo(cx + 5.6f * d, cy - 1.6f * d);
+                arrows.lineTo(cx + 4.3f * d, cy - 4.3f * d);
+                arrows.moveTo(cx + 1.2f * d, cy - 4.3f * d);
+                arrows.lineTo(cx + 4.3f * d, cy - 4.3f * d);
+                arrows.lineTo(cx + 4.3f * d, cy - 1.2f * d);
                 // South-west arrow
                 arrows.moveTo(cx + 0.8f * d, cy - 0.8f * d);
-                arrows.lineTo(cx - 5.6f * d, cy + 5.6f * d);
-                arrows.moveTo(cx - 1.6f * d, cy + 5.6f * d);
-                arrows.lineTo(cx - 5.6f * d, cy + 5.6f * d);
-                arrows.lineTo(cx - 5.6f * d, cy + 1.6f * d);
+                arrows.lineTo(cx - 4.3f * d, cy + 4.3f * d);
+                arrows.moveTo(cx - 1.2f * d, cy + 4.3f * d);
+                arrows.lineTo(cx - 4.3f * d, cy + 4.3f * d);
+                arrows.lineTo(cx - 4.3f * d, cy + 1.2f * d);
                 canvas.drawPath(arrows, paint);
             } else {
-                canvas.drawLine(cx - 4.2f * d, cy - 4.2f * d,
-                        cx + 4.2f * d, cy + 4.2f * d, paint);
-                canvas.drawLine(cx - 4.2f * d, cy + 4.2f * d,
-                        cx + 4.2f * d, cy - 4.2f * d, paint);
+                canvas.drawLine(cx - 3.2f * d, cy - 3.2f * d,
+                        cx + 3.2f * d, cy + 3.2f * d, paint);
+                canvas.drawLine(cx - 3.2f * d, cy + 3.2f * d,
+                        cx + 3.2f * d, cy - 3.2f * d, paint);
             }
         }
     }

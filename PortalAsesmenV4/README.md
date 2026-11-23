@@ -30,3 +30,27 @@ This build permits unencrypted HTTP traffic because the current portal redirects
 - Toolbar pill dimensions and centered placement are unchanged.
 - Only the three white glyph drawings were reduced in size; the black pill background was not resized.
 - App version: 1.4 (versionCode 5).
+
+
+## V6 changes
+
+- Android status bar background changed to black (`#000000`).
+- Status bar system icons are configured for white-on-black.
+- Toolbar glyph artwork (refresh, expand, close) reduced further.
+- Black toolbar pill width, height, position, and spacing remain unchanged.
+- Refresh remains functional; the other two icons remain decorative.
+- Navigation bar remains `#848BFF` with white system icons.
+- App version: 1.5 (versionCode 6).
+
+
+## V7 — reference-matched toolbar geometry
+
+The toolbar capsule was resized using the supplied 686 × 1536 reference image:
+- Approximate measured capsule bounds: 407 × 78 px.
+- Width: 59.3% of screen width.
+- Width-to-height ratio: 5.22:1.
+- Capsule height is calculated from its width, so the shape scales proportionally across screen sizes.
+- Corner radius is half the capsule height.
+- The capsule remains horizontally centered independently of the clock and battery indicators.
+- The existing black status bar, blue-violet navigation bar, small glyphs, and functional refresh button are preserved.
+- App version: 1.6 (versionCode 7).
